@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <include file=".\changesets\202010241623_added_entity_category.xml" relativeToChangelogFile="true"/>
+    <include file=".\changesets\202010241624_added_entity_user.xml" relativeToChangelogFile="true"/>
+    <include file=".\changesets\202010241626_added_entity_question.xml" relativeToChangelogFile="true"/>
+    <include file=".\changesets\202010241628_added_entity_question_has_user.xml" relativeToChangelogFile="true"/>
+    <include file=".\changesets\202010241634_added_entity_role.xml" relativeToChangelogFile="true"/>
+    <include file=".\changesets\202010241636_added_entity_user_role.xml" relativeToChangelogFile="true"/>
+    <include file=".\changesets\202010241637_added_entity_answer.xml" relativeToChangelogFile="true"/>
+    <include file=".\changesets\202010241642_added_data_to_role.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

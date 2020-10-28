@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="28" author="RadIvan2">
+
+        <preConditions>
+            <not>
+                <tableExists tableName="question_has_user"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="question_has_user">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="date_assigned" type="datetime" >
+                <constraints/>
+            </column>
+            <column name="assigned" type="bit">
+            </column>
+            <column name="question_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_question_has_user_question1" references="question(id)"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_question_has_user_user1" references="user(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>
