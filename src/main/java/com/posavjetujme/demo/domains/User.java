@@ -2,8 +2,9 @@ package com.posavjetujme.demo.domains;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@DynamicInsert
+@DynamicUpdate
 @Entity
 @Table(name = "user")
 public class User {
@@ -34,26 +37,24 @@ public class User {
     @Column
     private String email;
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "creator", targetEntity = Answer.class,cascade = CascadeType.ALL)
     private List<Answer> answers = new ArrayList<>();
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "approvedById", targetEntity = Answer.class,cascade = CascadeType.ALL)
-    private List<Answer> approvedAnswers = new ArrayList<>();
-
+/*
     @JsonManagedReference
-    @ManyToMany
+    @OneToMany(mappedBy = "approvedById", targetEntity = Answer.class,cascade = CascadeType.ALL)
+    private List<Answer> approvedAnswers = new ArrayList<>();*/
+
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(
             name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
-    )
-    private Set<Role> roles = new HashSet<>();
+            joinColumns = @JoinColumn(name="user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles= new HashSet<>();
 
-    @JsonBackReference
+   /* @JsonManagedReference
     @OneToMany(mappedBy = "user", targetEntity = QuestionHasUser.class)
-    private List<QuestionHasUser> questionHasUsers = new ArrayList<>();
+    private List<QuestionHasUser> questionHasUsers = new ArrayList<>();*/
 
     public Integer getId() {
         return id;
@@ -110,14 +111,14 @@ public class User {
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
-
+/*
     public List<Answer> getApprovedAnswers() {
         return approvedAnswers;
     }
 
     public void setApprovedAnswers(List<Answer> approvedAnswers) {
         this.approvedAnswers = approvedAnswers;
-    }
+    }*/
 
     public Set<Role> getRoles() {
         return roles;
@@ -127,11 +128,11 @@ public class User {
         this.roles = roles;
     }
 
-    public List<QuestionHasUser> getQuestionHasUsers() {
+/* public List<QuestionHasUser> getQuestionHasUsers() {
         return questionHasUsers;
     }
 
     public void setQuestionHasUsers(List<QuestionHasUser> questionHasUsers) {
         this.questionHasUsers = questionHasUsers;
-    }
+    }*/
 }

@@ -1,5 +1,6 @@
 package com.posavjetujme.demo.domains;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -19,13 +20,13 @@ public class QuestionHasUser {
     @Column
     private boolean assigned;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

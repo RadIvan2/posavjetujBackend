@@ -3,6 +3,7 @@ package com.posavjetujme.demo.domains;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -22,8 +23,8 @@ public class Role {
     @Column
     private String description;
 
-    @JsonBackReference
-    @ManyToMany(mappedBy = "roles",targetEntity = User.class)
+    @JsonIgnore
+    @ManyToMany(mappedBy = "roles",targetEntity = User.class,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private Set<User> users = new HashSet<>();
 
     public Integer getId() {

@@ -23,13 +23,13 @@
             </column>
             <column name="created_at" type="datetime" defaultValueComputed="CURRENT_TIMESTAMP" >
                 <constraints nullable="false" />
-            </column>
-            <column name="answered" type="bit">
-                <constraints nullable="false"/>
-            </column>
-            <column name="galery_available" type="bit">
-                <constraints nullable="false"/>
-            </column>
+              </column>
+            <!--  <column name="answered" type="bit">
+                  <constraints nullable="false"/>
+              </column>
+              <column name="galery_available" type="bit">
+                  <constraints nullable="false"/>
+              </column> -->
             <column name="category_id" type="int">
                 <constraints nullable="false" foreignKeyName="fk_question_category1" references="category(id)"/>
             </column>

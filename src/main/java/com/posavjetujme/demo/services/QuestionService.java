@@ -6,6 +6,8 @@ import com.posavjetujme.demo.repositories.QuestionRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,16 +34,28 @@ public class QuestionService {
     }
 
     public List<Question> getAnsweredQuestions() {
-        return questionRepository.findByGaleryAvailableTrueAndAnsweredTrue();
+        List<Question> listWithoutDuplicates = new ArrayList<>(
+                new HashSet<>(questionRepository.findByAnswersIsNotNull()));
+        return listWithoutDuplicates;
     }
 
-    public List<Question> getQuestionByCategory(Integer id){
-        return questionRepository.findByCategoryId(id);
+    public List<Question> getUnansweredQuestions() {
+        List<Question> listWithoutDuplicates = new ArrayList<>(
+                new HashSet<>(questionRepository.findByAnswersIsNull()));
+        return listWithoutDuplicates;
     }
+
+
+    /**public List<Question> getQuestionByCategory(Integer id){
+        return questionRepository.findByCategoryId(id);
+    }*/
 
     public List<Question> getAnsweredQuestionByCategory(Integer id){
-        return questionRepository.findByCategoryId(id);
+        List<Question> listWithoutDuplicates = new ArrayList<>(
+                new HashSet<>(questionRepository.findByCategoryIdAndAndAnswersIsNotNull(id)));
+        return listWithoutDuplicates;
     }
+
 
     public List<Question> findBySearchSpecification(Specification<Question> questionSpecification) {
         return questionRepository.findAll(questionSpecification);
@@ -64,5 +78,8 @@ public class QuestionService {
             return questionRepository.save(questionToBeUpdated);
         }
         return null;
+    }
+
+    public Question update(Question question) {return questionRepository.save(question);
     }
 }

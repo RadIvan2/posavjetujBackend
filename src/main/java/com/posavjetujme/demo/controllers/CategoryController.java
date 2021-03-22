@@ -1,6 +1,7 @@
 package com.posavjetujme.demo.controllers;
 
 import com.posavjetujme.demo.domains.Category;
+import com.posavjetujme.demo.domains.User;
 import com.posavjetujme.demo.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/category", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -28,6 +30,11 @@ public class CategoryController {
     @GetMapping
     public ResponseEntity<List<Category>> getAll(){
         return new ResponseEntity<>(categoryService.getAllCategories(),HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Optional<Category>> getCategoryById(@PathVariable Integer id){
+        return new ResponseEntity<>(categoryService.getCategoryById(id),HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")

@@ -6,7 +6,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet id="202010241636" author="RadIvan2">
+    <changeSet id="20201024645" author="RadIvan2">
 
         <preConditions>
             <not>
@@ -18,11 +18,11 @@
             <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="user_id" type="int">
-                <constraints nullable="false"  foreignKeyName="fk_user_has_role_user" references="user(id)"/>
-            </column>
             <column name="role_id" type="int">
-                <constraints nullable="false"  foreignKeyName="fk_user_has_role_role1" references="role(id)"/>
+                <constraints nullable="false"  foreignKeyName="fk_role_role_id" references="role(id)"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false"  foreignKeyName="fk_role_user_id" references="user(id)"/>
             </column>
         </createTable>
     </changeSet>

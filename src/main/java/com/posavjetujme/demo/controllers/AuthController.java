@@ -46,4 +46,6 @@ public class AuthController {
             return new ResponseEntity<>(Collections.singletonMap("message", e.getMessage()), HttpStatus.UNAUTHORIZED);
         }
     }
+
+
 }

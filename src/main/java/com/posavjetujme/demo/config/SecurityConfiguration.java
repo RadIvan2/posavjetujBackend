@@ -35,8 +35,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(HttpMethod.OPTIONS);
+        web.ignoring().antMatchers(HttpMethod.OPTIONS,"/api/**");
     }
+
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception
@@ -61,6 +62,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/api/question/**").permitAll()
+                .antMatchers("/api/category/**").permitAll()
+                .antMatchers("/api/answer/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/user/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/user/**").permitAll()
+                .antMatchers(HttpMethod.PUT,"/api/user/**").permitAll()
+                //.antMatchers("/api/user/**").permitAll()
+                .antMatchers("/api/role/**").permitAll()
+                .antMatchers(("/api/question-user/**")).permitAll()
                 .antMatchers("/authenticate/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

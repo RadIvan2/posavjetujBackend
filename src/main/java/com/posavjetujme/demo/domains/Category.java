@@ -3,14 +3,19 @@ package com.posavjetujme.demo.domains;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "category")
-public class Category {
+public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -21,8 +26,8 @@ public class Category {
     @Column(nullable = false)
     private String description;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "category", targetEntity = Question.class)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "category", targetEntity = Question.class, cascade = CascadeType.ALL)
     private List<Question> questions = new ArrayList<>();
 
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/question-user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/question-user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class QuestionHasUserController {
 
     @Autowired

@@ -8,8 +8,9 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question,Integer>, JpaSpecificationExecutor<Question> {
-    List<Question> findByGaleryAvailableTrueAndAnsweredTrue();
+    List<Question> findByAnswersIsNull();
+    List<Question> findByAnswersIsNotNull();
 
-    List<Question> findByCategoryId(Integer id);
+    List<Question> findByCategoryIdAndAndAnswersIsNotNull(Integer id);
 
 }

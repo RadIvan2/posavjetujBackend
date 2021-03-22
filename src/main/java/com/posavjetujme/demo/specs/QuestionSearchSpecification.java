@@ -33,16 +33,17 @@ public class QuestionSearchSpecification implements Specification<Question> {
         }
     }
 
-    private void filterQuestionGaleryAvailable(Root<Question> root,CriteriaBuilder criteriaBuilder,List<Predicate> predicates){
-        if(questionSearch.getQuestionGaleryAvailable() != null){
-            predicates.add(criteriaBuilder.equal(root.get("galeryAvailable"),questionSearch.getQuestionGaleryAvailable()));
-        }
-    }
 
     private void filterCategory(Root<Question> root,CriteriaBuilder criteriaBuilder,List<Predicate> predicates){
         if(questionSearch.getCategoryName() != null){
             Join<Question, Category> questionCategoryJoin = root.join("category");
             predicates.add(criteriaBuilder.equal(questionCategoryJoin.get("name"), questionSearch.getCategoryName()));
+        }
+    }
+
+    private void filterQuestionGaleryAvailable(Root<Question> root,CriteriaBuilder criteriaBuilder,List<Predicate> predicates){
+        if(questionSearch.getQuestionGaleryAvailable() != null){
+            predicates.add(criteriaBuilder.equal(root.get("galeryAvailable"),questionSearch.getQuestionGaleryAvailable()));
         }
     }
 

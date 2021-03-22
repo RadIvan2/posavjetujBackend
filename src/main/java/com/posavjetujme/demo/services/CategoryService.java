@@ -22,6 +22,10 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public Optional<Category> getCategoryById(Integer id){
+        return categoryRepository.findById(id);
+    }
+
     public Category updateCategory(Integer id, Category category) {
         Optional<Category> categoryOptional=categoryRepository.findById(id);
         if(categoryOptional.isPresent()){

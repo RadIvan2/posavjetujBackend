@@ -3,7 +3,7 @@ spring:
     name: Demo Project
   datasource:
     # driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/testna?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=CET
+    url: jdbc:mysql://localhost:3306/testna2?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=CET
     name: Posavjetuj MySQL Connection
     username: root
     password: root

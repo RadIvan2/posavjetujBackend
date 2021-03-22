@@ -28,7 +28,8 @@ public class QuestionController {
         if(question.getId() != null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        Question savedQuestion = questionService.create(question);
+        Question savedQuestion = questionService.
+                create(question);
         return new ResponseEntity<>(savedQuestion,HttpStatus.CREATED);
     }
     @GetMapping
@@ -41,7 +42,12 @@ public class QuestionController {
         return new ResponseEntity<>(questionService.getAnsweredQuestions(),HttpStatus.OK);
     }
 
-    @GetMapping("/category-{id}")
+    @GetMapping(value = "/unanswered")
+    public ResponseEntity<List<Question>> getUnanswewredQuestion(){
+        return new ResponseEntity<>(questionService.getUnansweredQuestions(),HttpStatus.OK);
+    }
+
+    @GetMapping("/answered-and-category-{id}")
     public ResponseEntity<List<Question>> getQuestionByCategory(@PathVariable Integer id){
         return new ResponseEntity<>(questionService.getAnsweredQuestionByCategory(id),HttpStatus.OK);
     }
@@ -66,6 +72,12 @@ public class QuestionController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(updatedQuestion,HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<Question> update(@RequestBody Question question){
+        Question updatedDepartment = questionService.update(question);
+        return new ResponseEntity<>(updatedDepartment,HttpStatus.OK);
     }
 }
 

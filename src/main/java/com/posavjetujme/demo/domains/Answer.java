@@ -1,6 +1,7 @@
 package com.posavjetujme.demo.domains;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -23,18 +24,18 @@ public class Answer {
     @Column(name = "created_at", nullable = false)
     private Date createdAt = new Date();
 
-    @ManyToOne
-    @JsonManagedReference
+    @ManyToOne(cascade = {CascadeType.MERGE})
+    @JsonIgnore
     @JoinColumn(name = "approved_by_id")
     private User approvedById;
 
-    @ManyToOne
-    @JsonManagedReference
+    @ManyToOne(cascade = {CascadeType.MERGE})
+    @JsonBackReference//(value="cretor-question")
     @JoinColumn(name = "creator_id", nullable = false)
     private User creator;
 
-    @ManyToOne
-    @JsonManagedReference
+    @ManyToOne(cascade = {CascadeType.MERGE})
+    @JsonBackReference(value="answ-question")
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
@@ -71,7 +72,7 @@ public class Answer {
         this.createdAt = createdAt;
     }
 
-    public User getApprovedById() {
+   public User getApprovedById() {
         return approvedById;
     }
 
