@@ -61,6 +61,10 @@ public class UserService {
                 userToBeUpdated.setSurname(user.getSurname());}
                 if(user.getEmail()!=null){
                 userToBeUpdated.setEmail(user.getEmail());}
+                if(user.getAnswers()!=null && !user.getAnswers().isEmpty()){
+                userToBeUpdated.setAnswers(user.getAnswers());}
+                if(user.getRoles()!=null && !user.getRoles().isEmpty()){
+                userToBeUpdated.setRoles(user.getRoles());}
                 return userRepository.save(userToBeUpdated);
             }
             return null;

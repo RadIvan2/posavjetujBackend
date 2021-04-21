@@ -17,16 +17,23 @@ services:
     networks:
       - academynetwork
 
-  academy-db:
-    build:
-      context: .
-      dockerfile: db.dockerfile
-    image: academy/demo:db
-    ports:
-      - "3306:3306"
-    volumes:
-      - ./data/db-data:/var/lib/mysql
-      - ./data/db-init:/docker-entrypoint-initdb.d/
+    #  academy-db:
+      #   build:
+      #      context: .
+    #     dockerfile: db.dockerfile
+    #   image: academy/demo:db
+      #   ports:
+    #    - "3306:3306"
+      #   volumes:
+      #    - ./data/db-data:/var/lib/mysql
+    #    - ./data/db-init:/docker-entrypoint-initdb.d/
+      # environment:
+      #    MYSQL_USER: root
+      #    MYSQL_ROOT_PASSWWORT: root
+    #    MYSQL_DATABASE: posavjetuj
+    #  container_name: academt-db
+      #   networks:
+    #    - academynetwork
 
 networks:
   academynetwork:

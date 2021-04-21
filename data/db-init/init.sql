@@ -1,0 +1,1 @@
+CREATE DATABASE IF NOT EXISTS posavjetuj CHARSET utf8 COLLATE utf8_slovenian_ci;

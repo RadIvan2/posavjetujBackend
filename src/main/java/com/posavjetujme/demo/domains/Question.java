@@ -28,13 +28,6 @@ public class Question implements Serializable {
     @Column(name = "created_at", nullable = false)
     private Date createdAt = new Date();
 
-    @Column(nullable = false)
-    private boolean answered = false;
-
-    @Column(name = "galery_available", nullable = false)
-    private boolean galeryAvailable = false;
-
-
     @JsonBackReference
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "category_id", nullable = false)
@@ -66,26 +59,6 @@ public class Question implements Serializable {
 
     public Date getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public boolean isAnswered() {
-        return answered;
-    }
-
-    public void setAnswered(boolean answered) {
-        this.answered = answered;
-    }
-
-    public boolean isGaleryAvailable() {
-        return galeryAvailable;
-    }
-
-    public void setGaleryAvailable(boolean galeryAvailable) {
-        this.galeryAvailable = galeryAvailable;
     }
 
     public Category getCategory() {

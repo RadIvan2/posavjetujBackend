@@ -12,8 +12,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@DynamicInsert
-@DynamicUpdate
 @Entity
 @Table(name = "user")
 public class User {
@@ -45,7 +43,7 @@ public class User {
     @OneToMany(mappedBy = "approvedById", targetEntity = Answer.class,cascade = CascadeType.ALL)
     private List<Answer> approvedAnswers = new ArrayList<>();*/
 
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @ManyToMany
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name="user_id", referencedColumnName = "id"),

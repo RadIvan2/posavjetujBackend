@@ -61,6 +61,10 @@ public class QuestionService {
         return questionRepository.findAll(questionSpecification);
     }
 
+    public List<Question> findByAnswerId(Integer id) {
+        return questionRepository.findByAnswersId(id);
+    }
+
     public void delete(Integer id) {
         questionRepository.deleteById(id);
     }
@@ -71,9 +75,6 @@ public class QuestionService {
         if(questionOptional.isPresent()){
             Question questionToBeUpdated = questionOptional.get();
             questionToBeUpdated.setContent(question.getContent());
-            questionToBeUpdated.setCreatedAt(question.getCreatedAt());
-            questionToBeUpdated.setAnswered(question.isAnswered());
-            questionToBeUpdated.setGaleryAvailable(question.isGaleryAvailable());
             questionToBeUpdated.setCategory(question.getCategory());
             return questionRepository.save(questionToBeUpdated);
         }

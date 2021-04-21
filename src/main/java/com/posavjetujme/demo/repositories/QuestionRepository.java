@@ -12,5 +12,6 @@ public interface QuestionRepository extends JpaRepository<Question,Integer>, Jpa
     List<Question> findByAnswersIsNotNull();
 
     List<Question> findByCategoryIdAndAndAnswersIsNotNull(Integer id);
+    List<Question> findByAnswersId(Integer id);
 
 }

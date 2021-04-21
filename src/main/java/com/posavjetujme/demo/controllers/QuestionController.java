@@ -52,6 +52,11 @@ public class QuestionController {
         return new ResponseEntity<>(questionService.getAnsweredQuestionByCategory(id),HttpStatus.OK);
     }
 
+    @GetMapping("/answer-{id}")
+    public ResponseEntity<List<Question>> geQuestionByAnswerId(@PathVariable Integer id){
+        return new ResponseEntity<>(questionService.findByAnswerId(id),HttpStatus.OK);
+    }
+
     @GetMapping(value = "/by-specs")
     public ResponseEntity<List<Question>> getBySpecs(QuestionSearch questionSearch){
         Specification<Question> questionSpecification = new QuestionSearchSpecification(questionSearch);
