@@ -1,0 +1,32 @@
+version: '3.2'
+
+services:
+  academy-services:
+    build:
+      context: .
+      dockerfile: academy.dockerfile
+    image: academy/demo:srv
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data/srv-config:/config
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+    container_name: academy_services
+    restart: always
+    networks:
+      - academynetwork
+
+  academy-db:
+    build:
+      context: .
+      dockerfile: db.dockerfile
+    image: academy/demo:db
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/db-data:/var/lib/mysql
+      - ./data/db-init:/docker-entrypoint-initdb.d/
+
+networks:
+  academynetwork:
